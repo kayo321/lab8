@@ -54,8 +54,7 @@ def login():
             #if(password_true[0][0] == 1):
                 #session['username'] = "username"
             flash('You were successfully logged in')
-            return redirect('/secret')
-            
+            return redirect('/secret')            
     return render_template('login.html', error=error, title='Sign In')
     
 @MyApp.route('/logout')
@@ -70,13 +69,11 @@ def about():
     
 @MyApp.route('/secret')
 def secret():
-    #if request.method != 'POST':
         error = None
-        if session['logged_in'] == True:
-            return render_template('secret.html')
-        else:
-            error = 'You must be logged in to access this page!'
-        return render_template('login.html', error=error, title='Sign In')
+        if session['logged_in'] != True:
+            error = 'You must be logged in to access this page!'            
+            return render_template('login.html', error=error, title='Sign In')
+        return render_template('secret.html')
         
    
 
