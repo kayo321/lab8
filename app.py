@@ -53,8 +53,9 @@ def login():
                 #password_true = query_db('SELECT COUNT(*) FROM USERS WHERE username = ? AND password = ?', (username, password))
             #if(password_true[0][0] == 1):
                 #session['username'] = "username"
-            return redirect('/secret')
             flash('You were successfully logged in')
+            return redirect('/secret')
+            
     return render_template('login.html', error=error, title='Sign In')
     
 @MyApp.route('/logout')
@@ -69,11 +70,12 @@ def about():
     
 @MyApp.route('/secret')
 def secret():
-    error = None
-    if session['logged_in'] == True:
-        return render_template('secret.html')
-    else:
-        error = 'You must be logged in to access this page!'
+    #if request.method != 'POST':
+        error = None
+        if session['logged_in'] == True:
+            return render_template('secret.html')
+        else:
+            error = 'You must be logged in to access this page!'
         return render_template('login.html', error=error, title='Sign In')
         
    
