@@ -70,7 +70,7 @@ def about():
 @MyApp.route('/secret')
 def secret():
         error = None
-        if session['logged_in'] != True:
+        if session.get('logged_in') != True:
             error = 'You must be logged in to access this page!'            
             return render_template('login.html', error=error, title='Sign In')
         return render_template('secret.html')
